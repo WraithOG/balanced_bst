@@ -1,29 +1,29 @@
 class Node {
-    constructor(data, leftChild, rightChild){
-        this.data = data;
-        this.leftChild = leftChild;
-        this.rightChild = rightChild;
+    constructor(){
+        this.data = null;
+        this.leftChild = null;
+        this.rightChild = null;
     }
 }
 
-class Tree {
+export class Tree {
     constructor(array){
         this.array = array;
         this.root = null;
     }
 
-
-    
-    buildTree(array, start = 0, end = arr.length - 1){
-        let arr = array;
+    buildTree(array, start = 0, end = array.length - 1){
         let mid = Math.ceil((start + end) / 2);
         let root = new Node();
-        root.data = arr[mid];
+        root.data = array[mid];
         if(start > end) {
             return;
         }
-        root.leftChild = this.buildTree(arr, start, mid - 1);
-        root.rightChild = this.buildTree(arr, mid + 1, end);
+        if(this.root === null){
+            this.root = root;
+        }
+        root.leftChild = this.buildTree(array, start, mid - 1);
+        root.rightChild = this.buildTree(array, mid + 1, end);
         return root;
     }
 
@@ -32,7 +32,7 @@ class Tree {
 }
 
 
-class cleanData{
+export class cleanData{
     constructor(array){
         this.array = array;
     }
@@ -68,6 +68,19 @@ class cleanData{
 }
 
 
-let arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
-let data = new cleanData(arr);
-let cleanData = data.mergeSort();
+
+
+export const prettyPrint = (node, prefix = "", isLeft = true) => {
+    if (node === null || node === undefined) {
+      return;
+    }
+    if (node.rightChild !== null) {
+      prettyPrint(node.rightChild, `${prefix}${isLeft ? "│   " : "    "}`, false);
+    }
+    console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
+    if (node.leftChild !== null) {
+      prettyPrint(node.leftChild, `${prefix}${isLeft ? "    " : "│   "}`, true);
+    }
+};
+
+
