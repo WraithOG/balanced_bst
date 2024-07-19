@@ -1,6 +1,6 @@
 class Node {
-    constructor(){
-        this.data = null;
+    constructor(data){
+        this.data = data;
         this.leftChild = null;
         this.rightChild = null;
     }
@@ -17,7 +17,7 @@ export class Tree {
         let root = new Node();
         root.data = array[mid];
         if(start > end) {
-            return;
+            return null;
         }
         if(this.root === null){
             this.root = root;
@@ -26,11 +26,22 @@ export class Tree {
         root.rightChild = this.buildTree(array, mid + 1, end);
         return root;
     }
-
+    insert(root, value) {
+        let node = new Node(value);
+        if(root === null) {
+            root = node;
+        }
+        else if(node.data < root.data){
+            root.leftChild = this.insert(root.leftChild, value);
+        }
+        else if(node.data > root.data) {
+            root.rightChild = this.insert(root.rightChild, value);
+        }
+        return root;
+    }
     
 
 }
-
 
 export class cleanData{
     constructor(array){
