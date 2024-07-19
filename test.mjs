@@ -9,6 +9,7 @@ let cData = data.mergeSort();
 let tree = new Tree(cData);
 let root = tree.buildTree(cData);
 tree.insert(root, 10);
+tree.remove(root, 67);
 
 
-console.log(tree.find(root, 10));
+prettyPrint(root);

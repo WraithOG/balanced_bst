@@ -39,6 +39,40 @@ export class Tree {
         }
         return root;
     }
+
+    remove(root, value) {
+        let node = this.find(root, value);
+
+        if(node.leftChild === null && node.rightChild === null) {
+            node.data = null;
+            
+        }
+        if(node.leftChild === null && node.rightChild !== null) {
+            node.data = node.rightChild.data;
+            node.leftChild = node.rightChild.leftChild;
+            node.rightChild = node.rightChild.rightChild;
+            
+        }
+        if (node.leftChild !== null && node.rightChild === null) {
+            let left = node.leftChild;
+            node.data = left.data;
+            node.leftChild = left.leftChild;
+            node.rightChild = left.rightChild;
+            
+        }
+        if(node.rightChild !== null && node.leftChild !==null) {
+            let min = node.rightChild;
+            while(min.leftChild !== null) {
+                min = min.leftChild;
+            }
+            node.data = min.data;
+            this.remove(node.rightChild, min.data);
+            
+        }
+        
+    }
+
+
     find(root, value) {
         let node = new Node(value);
         if(root.data === node.data || root === null) {
