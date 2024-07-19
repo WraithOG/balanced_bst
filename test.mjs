@@ -10,4 +10,5 @@ let tree = new Tree(cData);
 let root = tree.buildTree(cData);
 tree.insert(root, 10);
 
-prettyPrint(tree.root);
+
+console.log(tree.find(root, 10));

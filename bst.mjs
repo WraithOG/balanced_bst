@@ -39,7 +39,19 @@ export class Tree {
         }
         return root;
     }
-    
+    find(root, value) {
+        let node = new Node(value);
+        if(root.data === node.data || root === null) {
+            return root;
+        }
+        
+        if (node.data < root.data) {
+            return this.find(root.leftChild, value);
+        }
+        else if (node.data > root.data) {
+            return this.find(root.rightChild, value);
+        }
+    }
 
 }
 
